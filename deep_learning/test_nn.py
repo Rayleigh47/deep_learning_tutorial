@@ -75,3 +75,9 @@ with torch.no_grad():
 
 print(f"correct predictions: {correct} out of {X_test.shape[0]}")
 
+# try new iris data
+new_iris = torch.tensor([5.6, 3.7, 2.2, 0.5])
+with torch.no_grad(): # turn off gradient calculation
+    print(model(new_iris))
+
+
