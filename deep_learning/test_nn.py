@@ -58,7 +58,7 @@ y_train = torch.LongTensor(y_train.values) # convert to tensor (long)
 y_test = torch.LongTensor(y_test.values)
 
 # import trained model
-model.load_state_dict(torch.load('my_iris_model.pt', weights_only=True))
+model.load_state_dict(torch.load('iris/my_iris_model.pt', weights_only=True))
 model.eval() # set model to evaluation mode
 
 # Set criterion

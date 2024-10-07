@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn as nn # neural network
 import torch.nn.functional as F # activation functions
@@ -85,7 +86,8 @@ plt.xlabel('Epoch')
 # plt.show()
 
 # export model
-torch.save(model.state_dict(), 'my_iris_model.pt')
+os.makedirs('iris', exist_ok=True)
+torch.save(model.state_dict(), 'iris/my_iris_model.pt')
 
 # Calculate loss
 with torch.no_grad():
@@ -93,6 +95,11 @@ with torch.no_grad():
     loss = criterion(y_val, y_test)
 print(f'Loss: {loss:.8f}')
 
+# load model back in
+new_model = Model()
+new_model.load_state_dict(torch.load('iris/my_iris_model.pt', weights_only=True))
+
+print(new_model.eval())
 
 
 
