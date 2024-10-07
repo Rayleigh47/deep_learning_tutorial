@@ -6,7 +6,11 @@ build_image() {
 # Function to run the Docker container
 run_container() {
     echo "Running Docker container..."
-    docker run --name pytorch-container --gpus all -it --rm --env=DISPLAY -v $(pwd):/app pytorch-gpu
+    docker run --name pytorch-container --gpus all -it --rm \
+    -e DISPLAY=unix$DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v $(pwd):/app \
+    pytorch-gpu
 }
 
 # Help message
