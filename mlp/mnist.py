@@ -7,8 +7,7 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
 # Configure device
-# device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-device = torch.device('cpu' if torch.cuda.is_available() else 'cpu')
+device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 print(f"device: {device}")
 
 # Use seed for reproducibility
@@ -56,8 +55,9 @@ import time
 start = time.time()
 
 # Train the model
+losses = []
 print("Training the model")
-epochs = 20
+epochs = 3
 for epoch in range(epochs):
     for i, (images, labels) in enumerate(train_loader): # 60000 / 64 = 937.5
         images, labels = images.to(device), labels.to(device) # move images and labels to device
@@ -67,6 +67,7 @@ for epoch in range(epochs):
         
         # Calculate loss
         loss = criterion(outputs, labels)
+        losses.append(loss.item())
 
         # Backward and optimize
         optimizer.zero_grad()
@@ -79,6 +80,14 @@ for epoch in range(epochs):
 end = time.time()
 elapsed = end - start
 print(f"Time taken to train the model: {elapsed} seconds")
+
+# plot
+import matplotlib.pyplot as plt
+# Plot the loss
+plt.plot((range(epoch*len(train_loader) + i + 1)), losses)
+plt.ylabel('Loss')
+plt.xlabel('Epoch')
+plt.show()
 
 # Test the model
 print("Testing the model")

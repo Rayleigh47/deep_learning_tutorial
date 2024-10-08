@@ -83,7 +83,7 @@ for i in range(epochs):
 plt.plot(range(epochs), losses)
 plt.ylabel('Loss')
 plt.xlabel('Epoch')
-# plt.show()
+plt.show()
 
 # export model
 os.makedirs('iris', exist_ok=True)

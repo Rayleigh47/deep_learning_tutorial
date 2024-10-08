@@ -12,7 +12,7 @@ RUN apt-get update && \
         python3-opencv \
         libglib2.0-0 \
         libx11-dev \
-        python3-tk \
+        python3-tk
 # Install any python packages you need
 COPY requirements.txt requirements.txt
 
